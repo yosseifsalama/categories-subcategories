@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 
 class SubcategoryController extends Controller
 {
-    public function index() {
-        return Subcategory::all();
-    }
+    public function index()
+   {
+   
+     $subcategories = \App\Models\Subcategory::with('category')->get();
+
+     return response()->json($subcategories);
+  }
 
     public function store(Request $request) {
         $subcategory = Subcategory::create($request->all());
